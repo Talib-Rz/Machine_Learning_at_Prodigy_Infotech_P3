@@ -62,6 +62,22 @@ def generate_result(prediction):
 
 
 if submit:
-  try:
-    # Create temporary directory
-    temp_dir = tempfile.mkdtemp
+
+    # save image on that directory
+    save_img("static/uploads/test_image.png", img_array)
+
+    image_path = "static/uploads/test_image.png"
+    # Predicting
+    st.write("👁️ Predicting...")
+
+    loaded_model = load_model("static/models/model.h5")
+
+    prediction = processing(image_path)
+
+    cat_value = prediction[0][0] * 100
+    dog_value = prediction[0][1] * 100
+
+    generate_result(prediction)
+
+    st.write("Chance of Cat: ", cat_value, " %")
+    st.write("Chance of Dog: ", dog_value, " %")
