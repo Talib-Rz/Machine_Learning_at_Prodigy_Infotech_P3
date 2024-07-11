@@ -80,20 +80,5 @@ if submit:
 
 	except:
 		st.write("""
-		### ❗ Oops... Something Is Going Wrong
+		        Lunch Time! Please visit later, Thank you :)
 			""")
-
-#=============================== Copy Right ==============================
-st.text("""""")
-st.text("""""")
-st.text("""""")
-st.text("""""")
-st.text("""""")
-st.text("""""")
-st.text("""""")
-st.text("""""")
-st.text("""""")
-st.text("""""")
-st.write("""
-### ©️ Created By Debmalya Sur
-	""")
