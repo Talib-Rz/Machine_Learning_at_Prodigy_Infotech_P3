@@ -9,6 +9,11 @@ import os
 # Define the list of image paths
 img_path_list = ["path/to/your/cat_image.jpg", "path/to/your/dog_image.jpg"]
 
+# Check if image paths exist
+for img_path in img_path_list:
+    if not os.path.exists(img_path):
+        st.error(f"Image path does not exist: {img_path}")
+
 # Title of the app
 st.title("Cat or Dog Recognizer")
 
@@ -26,8 +31,8 @@ if img_file_buffer:
         image = Image.open(img_file_buffer)
         img_array = np.array(image)
         st.image(image, use_column_width=True)
-    except:
-        st.write("An error occurred while processing the image.")
+    except Exception as e:
+        st.error(f"An error occurred while processing the image: {e}")
 
 # Button for prediction
 submit = st.button("Predict")
@@ -50,6 +55,10 @@ def generate_result(prediction):
 if submit:
     if img_file_buffer:
         try:
+            # Ensure the directory exists
+            if not os.path.exists("temp_dir"):
+                os.makedirs("temp_dir")
+            
             # Save uploaded image
             save_img("temp_dir/test_image.png", img_array)
 
@@ -72,6 +81,6 @@ if submit:
             generate_result(prediction)
 
         except Exception as e:
-            st.write(f"An error occurred: {e}")
+            st.error(f"An error occurred: {e}")
     else:
         st.write("No image uploaded.")
