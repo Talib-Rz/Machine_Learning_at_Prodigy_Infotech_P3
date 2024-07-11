@@ -82,10 +82,3 @@ if submit:
 		st.write("""
 		        Lunch Time! Please visit later, Thank you :)
 			""")
-
-Traceback:
-File "/home/adminuser/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 589, in _run_script
-    exec(code, module.__dict__)
-File "/mount/src/machine_learning_at_prodigy_infotech_p3/app.py", line 17, in <module>
-    image = Image.open(img_path_list[index])
-                       ^^^^^^^^^^^^^
