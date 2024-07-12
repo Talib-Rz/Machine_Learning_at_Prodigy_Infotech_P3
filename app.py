@@ -56,9 +56,9 @@ if submit:
         prediction = processing(image_path)
         generate_result(prediction)
     except:
-        st.write = ["Hope the uploaded image is a Dog!", "Hope the uploaded image is a Cat!"]
+        ans_list = ["Hope the uploaded image is a Dog!", "Hope the uploaded image is a Cat!"]
         index = random.choice([0, 1])
-        image = Image.open(img_path_list[index])
+        image = Image.open(ans_list[index])
         st.image(image, use_column_width=True)
         st.write("If it's not working correctly, it means the App is under construction right now! Please Try after some time.")
 
