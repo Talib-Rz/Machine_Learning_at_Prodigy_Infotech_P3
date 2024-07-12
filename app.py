@@ -61,4 +61,3 @@ if submit:
 # Footer
 st.write("Cooked By Talib Rz")
 
-still it is giving "Oops... Something is wrong"
