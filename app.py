@@ -55,12 +55,13 @@ if submit:
 
         prediction = processing(image_path)
         generate_result(prediction)
-    except:
+    except Exception as e:
        ans_list = ["Hope the uploaded image is a Dog!", "Hope the uploaded image is a Cat!"]
        index = random.choice([0, 1])
        ans = ans_list[index]
        st.write(ans)
        st.write("If it's not working correctly, it means the App is under construction right now! Please Try after some time.")
+
 
 
 # Footer
