@@ -8,7 +8,6 @@ import os
 # Title
 st.title("Cat 🐱 Or Dog 🐶 Recognizer")
 
-
 # File Uploader
 img_file_buffer = st.file_uploader("Upload an image here 👇🏻")
 
@@ -29,7 +28,7 @@ def processing(testing_image_path):
     IMG_SIZE = 50
     img = load_img(testing_image_path, target_size=(IMG_SIZE, IMG_SIZE), color_mode="grayscale")
     img_array = img_to_array(img) / 255.0
-    img_array = img_array.reshape((1, 50, 50, 1))
+    img_array = img_array.reshape((1, IMG_SIZE, IMG_SIZE, 1))
     prediction = loaded_model.predict(img_array)
     return prediction
 
