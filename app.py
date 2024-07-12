@@ -60,7 +60,7 @@ if submit:
         index = random.choice([0, 1])
         image = Image.open(img_path_list[index])
         st.image(image, use_column_width=True)
-        st.write("If it's not working correctly, it means "App" is under construction right now! Please Try after some time.")
+        st.write("If it's not working correctly, it means the App is under construction right now! Please Try after some time.")
 
 # Footer
 st.write("Cooked By Talib Rz")
