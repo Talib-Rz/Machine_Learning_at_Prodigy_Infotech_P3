@@ -55,11 +55,11 @@ if submit:
 
         prediction = processing(image_path)
         generate_result(prediction)
-    except Exception as e:
+    except:
        ans_list = ["Hope the uploaded image is a Dog!", "Hope the uploaded image is a Cat!"]
        index = random.choice([0, 1])
-       image = Image.open(f"static/{index + 1}.jpg")  # Adjust path as per your image location
-       st.image(image, use_column_width=True)
+       ans = ans_list[index]
+       st.write(ans)
        st.write("If it's not working correctly, it means the App is under construction right now! Please Try after some time.")
 
 
