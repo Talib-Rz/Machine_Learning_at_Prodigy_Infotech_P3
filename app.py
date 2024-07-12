@@ -6,7 +6,7 @@ import numpy as np
 import os
 
 # Title
-st.title("Cat 🐱 Or Dog 🐶 Recognizer")
+st.title("Cat or Dog Recognizer")
 
 # File Uploader
 img_file_buffer = st.file_uploader("Upload an image here 👇🏻")
