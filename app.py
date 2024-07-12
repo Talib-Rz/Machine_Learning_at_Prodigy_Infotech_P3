@@ -1,12 +1,13 @@
 import streamlit as st
 from PIL import Image
 from tensorflow.keras.preprocessing.image import load_img, img_to_array, save_img
-from tensorflow.keras.models import model_from_json
+from tensorflow.keras.models import model_from_json, Sequential
 import numpy as np
 import os
 
 # Title
 st.title("Cat 🐱 Or Dog 🐶 Recognizer")
+
 
 # File Uploader
 img_file_buffer = st.file_uploader("Upload an image here 👇🏻")
@@ -56,7 +57,7 @@ if submit:
             try:
                 with open("model/model.json", 'r') as json_file:
                     loaded_model_json = json_file.read()
-                loaded_model = model_from_json(loaded_model_json)
+                loaded_model = model_from_json(loaded_model_json, custom_objects={'Sequential': Sequential})
                 loaded_model.load_weights("model/model.h5")
                 loaded_model.compile(loss='binary_crossentropy', metrics=['accuracy'], optimizer='adam')
             except Exception as e:
