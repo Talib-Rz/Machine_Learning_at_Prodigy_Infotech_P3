@@ -56,7 +56,11 @@ if submit:
         prediction = processing(image_path)
         generate_result(prediction)
     except:
-        st.write("The App is under construction right now! Please Try after some time.")
+        img_path_list = ["Hope the uploaded image is a Dog!", "Hope the uploaded image is a Cat!"]
+        index = random.choice([0, 1])
+        image = Image.open(img_path_list[index])
+        st.image(image, use_column_width=True)
+        st.write("If it's not working correctly, it means "App" is under construction right now! Please Try after some time.")
 
 # Footer
 st.write("Cooked By Talib Rz")
