@@ -43,30 +43,33 @@ def generate_result(prediction):
         st.write("## Model predicts it as an image of a DOG 🐶!!!")
 
 # Predict Button Clicked
-if submit and img_file_buffer is not None:
-    try:
-        # Ensure the temp_dir exists
-        if not os.path.exists("temp_dir"):
-            os.makedirs("temp_dir")
-
-        save_img("temp_dir/test_image.png", img_array)
-        image_path = "temp_dir/test_image.png"
-
-        # Load Model
+if submit:
+    if img_file_buffer is not None:
         try:
-            with open("model/model.json", 'r') as json_file:
-                loaded_model_json = json_file.read()
-            loaded_model = model_from_json(loaded_model_json)
-            loaded_model.load_weights("model/model.h5")
-            loaded_model.compile(loss='binary_crossentropy', metrics=['accuracy'], optimizer='adam')
-        except Exception as e:
-            st.write(f"Error loading model: {e}")
-            raise e
+            # Ensure the temp_dir exists
+            if not os.path.exists("temp_dir"):
+                os.makedirs("temp_dir")
 
-        prediction = processing(image_path)
-        generate_result(prediction)
-    except Exception as e:
-        st.write(f"Oops... Something is wrong: {e}")
+            save_img("temp_dir/test_image.png", img_array)
+            image_path = "temp_dir/test_image.png"
+
+            # Load Model
+            try:
+                with open("model/model.json", 'r') as json_file:
+                    loaded_model_json = json_file.read()
+                loaded_model = model_from_json(loaded_model_json)
+                loaded_model.load_weights("model/model.h5")
+                loaded_model.compile(loss='binary_crossentropy', metrics=['accuracy'], optimizer='adam')
+            except Exception as e:
+                st.write(f"Error loading model: {e}")
+                raise e
+
+            prediction = processing(image_path)
+            generate_result(prediction)
+        except Exception as e:
+            st.write(f"Oops... Something is wrong: {e}")
+    else:
+        st.write("### ❗ No image uploaded yet")
 
 # Footer
 st.write("Cooked By Talib Rz")
