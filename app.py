@@ -56,7 +56,7 @@ if submit:
         prediction = processing(image_path)
         generate_result(prediction)
     except:
-        img_path_list = ["Hope the uploaded image is a Dog!", "Hope the uploaded image is a Cat!"]
+        st.write = ["Hope the uploaded image is a Dog!", "Hope the uploaded image is a Cat!"]
         index = random.choice([0, 1])
         image = Image.open(img_path_list[index])
         st.image(image, use_column_width=True)
