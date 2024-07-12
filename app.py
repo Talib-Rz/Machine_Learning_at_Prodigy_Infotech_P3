@@ -8,17 +8,19 @@ import random
 # Title
 st.title("Cat 🐱 Or Dog 🐶 Recognizer")
 
-
 # File Uploader
 img_file_buffer = st.file_uploader("Upload an image here 👇🏻")
 
 try:
-    image = Image.open(img_file_buffer)
-    img_array = np.array(image)
-    st.image(image, use_column_width=True)
-    st.write("Now, click the '👉🏼 Predict' button to see the prediction!")
-except:
-    st.write("Any Picture hasn't selected yet!")
+    if img_file_buffer is not None:
+        image = Image.open(img_file_buffer)
+        img_array = np.array(image)
+        st.image(image, use_column_width=True)
+        st.write("Now, click the '👉🏼 Predict' button to see the prediction!")
+    else:
+        st.write("No picture uploaded yet!")
+except TypeError:
+    st.write("Please upload a valid image file!")
 
 # Predict Button
 submit = st.button("👉🏼 Predict")
@@ -43,26 +45,23 @@ def generate_result(prediction):
 # Predict Button Clicked
 if submit:
     try:
-        save_img("temp_dir/test_image.png", img_array)
-        image_path = "temp_dir/test_image.png"
+        if img_file_buffer is not None:
+            save_img("temp_dir/test_image.png", img_array)
+            image_path = "temp_dir/test_image.png"
 
-        # Load Model
-        with open("model/model.json", 'r') as json_file:
-            loaded_model_json = json_file.read()
-        loaded_model = model_from_json(loaded_model_json)
-        loaded_model.load_weights("model/model.h5")
-        loaded_model.compile(loss='binary_crossentropy', metrics=['accuracy'], optimizer='adam')
+            # Load Model
+            with open("model/model.json", 'r') as json_file:
+                loaded_model_json = json_file.read()
+            loaded_model = model_from_json(loaded_model_json)
+            loaded_model.load_weights("model/model.h5")
+            loaded_model.compile(loss='binary_crossentropy', metrics=['accuracy'], optimizer='adam')
 
-        prediction = processing(image_path)
-        generate_result(prediction)
+            prediction = processing(image_path)
+            generate_result(prediction)
+        else:
+            st.write("No picture uploaded yet!")
     except Exception as e:
-       ans_list = ["Hope the uploaded image is a Dog!", "Hope the uploaded image is a Cat!"]
-       index = random.choice([0, 1])
-       ans = ans_list[index]
-       st.write(ans)
-       st.write("If it's not working correctly, it means the App is under construction right now! Please Try after some time.")
-
-
+        st.write("An error occurred during prediction:", e)
 
 # Footer
 st.write("Cooked By Talib Rz")
