@@ -8,17 +8,19 @@ import random
 # Title
 st.title("Cat 🐱 Or Dog 🐶 Recognizer")
 
-
 # File Uploader
 img_file_buffer = st.file_uploader("Upload an image here 👇🏻")
 
-try:
-    image = Image.open(img_file_buffer)
-    img_array = np.array(image)
-    st.image(image, use_column_width=True)
-    st.write("Now, click the '👉🏼 Predict' button to see the prediction!")
-except:
-    st.write("Any Picture hasn't selected yet!")
+if img_file_buffer is not None:
+    try:
+        image = Image.open(img_file_buffer)
+        img_array = np.array(image)
+        st.image(image, use_column_width=True)
+        st.write("Now, click the '👉🏼 Predict' button to see the prediction!")
+    except Exception as e:
+        st.write("Error loading image:", e)
+else:
+    st.write("Please upload an image.")
 
 # Predict Button
 submit = st.button("👉🏼 Predict")
@@ -55,12 +57,10 @@ if submit:
 
         prediction = processing(image_path)
         generate_result(prediction)
-    except:
-       ans_list = ["Something went wrong. Hope the uploaded image is a Dog!", 
-                "Something went wrong. Hope the uploaded image is a Cat!"]
-       index = random.choice([0, 1])
-       ans = ans_list[index]
-       st.write(ans)
+    except FileNotFoundError:
+        st.write("Model file not found.")
+    except Exception as e:
+        st.write("Prediction error:", e)
 
 # Footer
 st.write("Cooked By Talib Rz")
