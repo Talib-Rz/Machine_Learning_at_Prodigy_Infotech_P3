@@ -9,21 +9,21 @@ import os
 st.title("Cat or Dog Recognizer")
 
 # File Uploader
-img_file_buffer = st.file_uploader("Upload an image here 👇🏻")
+img_file_buffer = st.file_uploader("Upload an image here ")
 
 if img_file_buffer is not None:
     try:
         image = Image.open(img_file_buffer)
         img_array = np.array(image)
         st.image(image, use_column_width=True)
-        st.write("Now, click the '👉🏼 Predict' button to see the prediction!")
+        st.write("Now, click the ' Predict' button to see the prediction!")
     except Exception as e:
         st.write(f"Error loading image: {e}")
 else:
     st.write("Any Picture hasn't selected yet!")
 
 # Predict Button
-submit = st.button("👉🏼 Predict")
+submit = st.button(" Predict")
 
 # Model Prediction Function
 def processing(testing_image_path):
@@ -36,11 +36,11 @@ def processing(testing_image_path):
 
 # Generate Result Function
 def generate_result(prediction):
-    st.write("## 🎯 RESULT")
+    st.write("##  RESULT")
     if prediction[0] < 0.5:
-        st.write("## Model predicts it as an image of a CAT 🐱!!!")
+        st.write("## Model predicts it as an image of a CAT !!!")
     else:
-        st.write("## Model predicts it as an image of a DOG 🐶!!!")
+        st.write("## Model predicts it as an image of a DOG !!!")
 
 # Predict Button Clicked
 if submit:
@@ -69,7 +69,7 @@ if submit:
         except Exception as e:
             st.write(f"Oops... Something is wrong: {e}")
     else:
-        st.write("### ❗ No image uploaded yet")
+        st.write("###  No image uploaded yet")
 
 # Footer
 st.write("Cooked By Talib Rz")
